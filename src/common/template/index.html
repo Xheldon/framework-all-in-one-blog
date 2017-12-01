@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include ./header.html -%>
+    <% if (htmlWebpackPlugin.options.data.title) {%>
+    <title><%- htmlWebpackPlugin.options.data.title %></title>
+    <%} else {%>
+    <title></title>
+    <%}%>
+    <% htmlWebpackPlugin.files.chunks[htmlWebpackPlugin.options.data.entry].css.forEach(function(css) { %>
+    <link rel="stylesheet" href="<%- css %>">
+    <% }); %>
+</head>
+<body>
+<div id="mount"></div>
+<%- include ./cat.html -%>
+<% if (htmlWebpackPlugin.files.chunks.manifest) {%>
+<script defer src="<%- htmlWebpackPlugin.files.chunks.manifest.entry %>"></script>
+<%}%>
+<% if (htmlWebpackPlugin.files.chunks.vendor) {%>
+<script defer src="<%- htmlWebpackPlugin.files.chunks.vendor.entry %>"></script>
+<%}%>
+<% if (htmlWebpackPlugin.files.chunks[htmlWebpackPlugin.options.data.vendor]) {%>
+<script defer src="<%- htmlWebpackPlugin.files.chunks[htmlWebpackPlugin.options.data.vendor].entry %>"></script>
+<%}%>
+<script defer src="<%- htmlWebpackPlugin.files.chunks[htmlWebpackPlugin.options.data.entry].entry %>"></script>
+<%- include ./safe-area.html -%>
+</body>
+</html>
