@@ -25,7 +25,7 @@ let js = glob.sync('./src/vue/index.js').reduce((prev, curr) => {
     prev[curr.slice(6, -3)] = [curr];
     return prev;
 }, {});
-
+console.log('js:', js);
 module.exports = {
     entry: js, // tips: js 为一个对象, 键可以带/, 会按目录生成
     output: {
@@ -36,12 +36,12 @@ module.exports = {
     },
     resolve: {
         extensions: ['.js', '.vue', '.json'], // 可以使 require 模块的时候不用写中的后缀如 require('a.js') 只需要写 require('a');
-        modules: [ // 告诉 webpack 解析模块应该搜索的目录, 默认为 node_module, 此配置 src 目录优先于 node_module 搜索
-            resolve('src'),
-            'node_module',
-        ],
+        // modules: [ // 告诉 webpack 解析模块应该搜索的目录, 默认为 node_module, 此配置 src 目录优先于 node_module 搜索
+        //     // resolve('src'),
+        //     'node_modules',
+        // ],
         alias: {
-            'vue$': 'vue/dist/vue.commom.js',
+            'vue$': 'vue/dist/vue.common.js',
             'src': path.resolve(__dirname, '../src'),
         }
     },

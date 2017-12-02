@@ -43,11 +43,11 @@ module.exports = merge(baseConfig, {
         publicPath: '/'
     },
     plugins: [
-        new webpack.DefinePlugin({
-            'process.env': config.dev.env
-        }),
+        // new webpack.DefinePlugin({
+        //     'process.env': config.dev.env
+        // }),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
-        new FriendlyErrorsPlugin()
+        // new FriendlyErrorsPlugin()
     ].concat(html)
 });
