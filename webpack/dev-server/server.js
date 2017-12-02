@@ -7,7 +7,7 @@ let path = require('path');
 let express = require('express');
 let webpack = require('webpack');
 let webpackConfig = process.env.NODE_ENV === 'prod' ? require('../webpack.prod') : require('../webpack.dev');
-
+// console.log('webpackConf:', webpackConfig);
 let port = config.dev.port;
 
 let app = express();
@@ -41,12 +41,13 @@ let staticPath = path.posix.join(config.dev.assetsPublicPath, config.dev.assetsS
 
 app.use(staticPath, express.static('./static'));
 
-let uri = 'http://localhost:' + prot;
+let uri = 'http://localhost:' + port;
 
-devMiddleware.waitUtilValid(() => {
+devMiddleware.waitUntilValid(() => {
     console.log(`> Listening at ${uri}\n`);
 });
 module.exports = app.listen(port, (err) => {
+    // console.log('err:', err);
     if (err) {
         console.log(`app error: ${__dirname}-${err}`);
         return;

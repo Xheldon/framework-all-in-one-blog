@@ -3,6 +3,8 @@ let glob = require('glob');
 let webpack = require('webpack');
 let config = require('./config/env.config');
 let merge = require('webpack-merge');
+let FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin'); // 友好的显示出那些出错了而没有编译成功
+
 
 let baseConfig = require('./webpack.base');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -25,24 +27,27 @@ let html = Object.keys(baseConfig.entry).map((item) => {
     });
 });
 
-module.exports = (env) => {
-    return webpackMerge(baseConfig, {
-        devtool: 'cheap-module-source-map',
-        output: {
-            filename: '[name].js',
-            publicPath: '/',
-            sourceMapFilename: '[name].map'
-        },
-        devServer: {
-            prot: 8089,
-            host: 'localhost',
-            historyApiFallback: true,
-            noInfo: false,
-            stats: 'minimal',
-            publicPath: '/'
-        },
-        plugin: [
-            new webpack.NamedModulesPlugin()
-        ].concat(html)
-    });
-};
+module.exports = merge(baseConfig, {
+    devtool: 'cheap-module-source-map',
+    output: {
+        filename: '[name].js',
+        publicPath: '/',
+        sourceMapFilename: '[name].map'
+    },
+    devServer: {
+        port: config.dev.port,
+        host: 'localhost',
+        historyApiFallback: true,
+        noInfo: false,
+        stats: 'minimal',
+        publicPath: '/'
+    },
+    plugins: [
+        new webpack.DefinePlugin({
+            'process.env': config.dev.env
+        }),
+        new webpack.HotModuleReplacementPlugin(),
+        new webpack.NoEmitOnErrorsPlugin(),
+        new FriendlyErrorsPlugin()
+    ].concat(html)
+});

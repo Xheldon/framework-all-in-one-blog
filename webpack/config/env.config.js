@@ -4,7 +4,7 @@ module.exports = {
     build: {
         env: {
             NODE_ENV: 'prod',
-            PROCESS_ENV: JSON.stringify(procss.env.NODE_ENV)
+            PROCESS_ENV: JSON.stringify(process.env.NODE_ENV)
         },
         assetsRoot: path.resolve(__dirname, '../../build'),
         assetsSubDir: 'dist',
@@ -13,14 +13,14 @@ module.exports = {
         prodGzipExt: ['js', 'css']
     },
     dev: {
-        port: 8081,
+        port: 8089,
         env: {
             NODE_ENV: 'dev',
-            PROCESS_ENV: JSON.stringify(procss.env.NODE_ENV)
+            PROCESS_ENV: JSON.stringify(process.env.NODE_ENV)
         },
         assetsPublicPath: '/',
         assetsRoot: path.resolve(__dirname, '../../build'),
-        assetsSubDirectory: 'dist',
+        assetsSubDir: 'dist',
         cssSourceMap: false
     }
 };

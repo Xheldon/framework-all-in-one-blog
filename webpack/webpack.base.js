@@ -9,14 +9,14 @@ let loaderConfig = require('./config/loader.config.js');
 
 // 项目路径
 let projectRoot = path.resolve(__dirname,'../');
-console.log('projectRoot:', projectRoot);
+// console.log('projectRoot:', projectRoot);
 
 // 辅助函数, 少写点代码
 function resolve(dir) {
     return path.join(__dirname, '..', dir)
 }
 
-let js = glob.sync('./src/*/*.js').reduce((prev, curr) => {
+let js = glob.sync('./src/vue/index.js').reduce((prev, curr) => {
     /*  注释: 为什么参数路径为 ./src 是因为该文件虽然路径是(相对 project) /webpack/webpack.base.js
         但是 node 执行的时候还是执行的是 /webpack.env.config.js, 因此路径应该相对为 webpack.env.config.js 所在的文件的相对路径, 即根目录
         这个跟 __dirname 这个全局变量返回的是当前文件目录, 即 webpack.base.js 所在的目录, 即/webpack 略有不同.
@@ -30,7 +30,8 @@ module.exports = {
     entry: js, // tips: js 为一个对象, 键可以带/, 会按目录生成
     output: {
         path: config.build.assetsRoot,
-        filename: '[name].js'
+        filename: '[name].js',
+        publicPath: ""
         // TODO: publicPath 路径暂时不填
     },
     resolve: {
@@ -46,6 +47,7 @@ module.exports = {
     },
     plugins: [],
     externals: { // 不把import 的以下键中的包打包到 bundle 中, 而是从外部加载(如 cdn 等), 剥离常用的 library
+        ejs: 'ejs',
         jquery: 'jQuery'
     },
     module: { // 定义处理各种 ext 文件的 loader 和规则
@@ -73,7 +75,7 @@ module.exports = {
                 loader: 'url-loader',
                 query: {
                     limit: 10000,
-                    name: loaderConfig.assetsPath('img/[name].[hash:7].[ext]')
+                    name: loaderConfig.assetsPath('font/[name].[hash:7].[ext]')
                 }
             },
             {

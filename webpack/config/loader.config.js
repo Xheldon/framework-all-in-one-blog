@@ -1,7 +1,7 @@
 let path = require('path');
-let config = require('webpack/config/env.config');
+let config = require('./env.config');
 let ExtractTextPlugin = require('extract-text-webpack-plugin');
-let isProd = process.end.NODE_ENV === 'prod';
+let isProd = process.env.NODE_ENV === 'prod';
 
 let _publicPaths = {
     dev: config.dev.assetsSubDir,
@@ -35,8 +35,8 @@ let cssLoaders = (options = {}) => {
 
     return {
         css: generateLoaders(['css']),
-        postcss: generateLoaders([css]),
-        scss: generateLoaders(['css', sass])
+        postcss: generateLoaders(['css']),
+        scss: generateLoaders(['css', 'sass'])
     }
 };
 
@@ -52,16 +52,16 @@ let vueLoader = {
     ]
 };
 
-let assetsPath = (path) => {
-    let assetsSubDir = _publicPaths[process.end.NODE_ENV] || config.dev.assetsSubDir;
-    return path.posix.join(assetsSubDir, path);
+let assetsPath = (_path) => {
+    let assetsSubDir = _publicPaths[process.env.NODE_ENV] || config.dev.assetsSubDir;
+    return path.posix.join(assetsSubDir, _path);
 };
 
 let templateUrl = path.resolve(__dirname, '../../src/common/template/index.html');
 
 
 module.exports = {
-    cssLoader,
+    cssLoaders,
     vueLoader,
     assetsPath,
     templateUrl
