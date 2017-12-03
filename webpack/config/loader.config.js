@@ -60,11 +60,25 @@ let assetsPath = (_path) => {
 let templateUrl = path.resolve(__dirname, '../../src/common/template/index.html');
 
 
+let styleLoaders = (options) => { // 待查
+    let output = [];
+    let loaders = cssLoaders(options);
+    for (let extension in loaders) {
+        let loader = loaders[extension];
+        output.push({
+            test: new RegExp('\\.' + extension + '$'),
+            loader: loader
+        });
+    }
+    return output;
+};
+
 module.exports = {
     cssLoaders,
     vueLoader,
     assetsPath,
-    templateUrl
+    templateUrl,
+    styleLoaders
 };
 
 

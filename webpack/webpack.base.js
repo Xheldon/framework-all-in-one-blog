@@ -25,7 +25,6 @@ let js = glob.sync('./src/vue/index.js').reduce((prev, curr) => {
     prev[curr.slice(6, -3)] = [curr];
     return prev;
 }, {});
-console.log('js:', js);
 module.exports = {
     entry: js, // tips: js 为一个对象, 键可以带/, 会按目录生成
     output: {

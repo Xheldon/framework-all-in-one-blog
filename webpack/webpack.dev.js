@@ -27,27 +27,33 @@ let html = Object.keys(baseConfig.entry).map((item) => {
     });
 });
 
+Object.keys(baseConfig.entry).forEach((name) => {
+    baseConfig.entry[name] = ['./webpack/dev-server/client.js'].concat(baseConfig.entry[name]); // concat 的为绝对路径
+});
+// console.log(baseConfig);
+
 module.exports = merge(baseConfig, {
     devtool: 'cheap-module-source-map',
-    output: {
-        filename: '[name].js',
-        publicPath: '/',
-        sourceMapFilename: '[name].map'
+    module: {
+        rules: loaderConfig.styleLoaders({sourceMap: config.dev.cssSourceMap})
     },
     devServer: {
-        port: config.dev.port,
+        port: 8089,
         host: 'localhost',
         historyApiFallback: true,
         noInfo: false,
         stats: 'minimal',
         publicPath: '/'
     },
+    output: {
+        filename: '[name].js',
+        publicPath: '/',
+        sourceMapFilename: '[name].map'
+    },
     plugins: [
-        // new webpack.DefinePlugin({
-        //     'process.env': config.dev.env
-        // }),
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
+        new webpack.NamedModulesPlugin()
         // new FriendlyErrorsPlugin()
     ].concat(html)
 });

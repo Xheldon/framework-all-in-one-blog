@@ -6,8 +6,8 @@ if (!process.env.NODE_ENV) {
 let path = require('path');
 let express = require('express');
 let webpack = require('webpack');
+console.log('process.env.NODE_ENV:', process.env.NODE_ENV);
 let webpackConfig = process.env.NODE_ENV === 'prod' ? require('../webpack.prod') : require('../webpack.dev');
-// console.log('webpackConf:', webpackConfig);
 let port = config.dev.port;
 
 let app = express();
