@@ -16,6 +16,8 @@ function resolve(dir) {
     return path.join(__dirname, '..', dir)
 }
 
+let fs = require('fs');
+
 
 let js = glob.sync('./src/vue/index.js').reduce((prev, curr) => {
     /*  注释: 为什么参数路径为 ./src 是因为该文件虽然路径是(相对 project) /webpack/webpack.base.js
@@ -27,6 +29,27 @@ let js = glob.sync('./src/vue/index.js').reduce((prev, curr) => {
     return prev;
 }, {});
 console.log('js:', js);
+
+let out = fs.createWriteStream(path.resolve(__dirname, '../src/common/md/post-list.js'), {
+    encoding: 'utf8'
+});
+let md = glob.sync('./src/common/md/*.md');
+out.write('module.exports = [');
+    for (let i in md) {
+        if (md[i]) {
+            md[i] = md[i].slice(16);
+            if (i === md.length -1) {
+                out.write(`'${md[i]}'`);
+            } else {
+                out.write(`'${md[i]}',\r\n`);
+            }
+        }
+    }
+out.write('];');
+out.end();
+
+
+
 module.exports = {
     entry: js, // tips: js 为一个对象, 键可以带/, 会按目录生成
     output: {
@@ -80,9 +103,6 @@ module.exports = {
                 }
             }
         ]
-    },
-    node: {
-        fs: 'empty'
     }
 };
 

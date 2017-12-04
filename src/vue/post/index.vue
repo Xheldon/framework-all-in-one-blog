@@ -2,18 +2,23 @@
     <div>
         {{data}}
         <div v-html="md" id="markdown"></div>
-        {{fs}}
     </div>
 </template>
 <script>
-    import md from 'src/common/md/markdown.md';
-    import fs from 'fs';
     export default {
         data () {
             return {
                 data: '这个是文章页',
-                md,
-                fs
+                md: ''
+            }
+        },
+        mounted () {
+            let query = document.location;
+            if (query.hash.split('=')[1]) {
+                let name = query.hash.split('=')[1];
+                import('src/common/md/'+name).then((md) => {
+                    this.md = md;
+                });
             }
         }
     }

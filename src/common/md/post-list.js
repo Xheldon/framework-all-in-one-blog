@@ -1,0 +1,12 @@
+module.exports = ['2015-06-05-in-the-ganjiang-river.md',
+'2015-07-20-how-to-use-rz-sz-on-mac.md',
+'2015-10-01-how-i-think-people-privacy.md',
+'2015-10-30-how-to-work.md',
+'2015-12-21-weibo-jssdk.md',
+'2016-03-04-promise-antipattern.md',
+'2016-04-21-git-command.md',
+'2016-04-30-vue-simple-use.md',
+'2016-05-02-webpack-details-one.md',
+'2016-05-23-github-pages-config.md',
+'markdown.md',
+];

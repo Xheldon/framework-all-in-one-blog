@@ -7,3 +7,10 @@
         </ul>
     </div>
 </template>
+<style scoped>
+    li {
+        width: 100px;
+        text-align: center;
+        float: left;
+    }
+</style>

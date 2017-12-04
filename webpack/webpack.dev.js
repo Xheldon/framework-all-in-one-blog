@@ -54,7 +54,7 @@ module.exports = merge(baseConfig, {
     },
     output: {
         filename: '[name].js',
-        publicPath: '',
+        publicPath: '/',
         sourceMapFilename: '[name].map'
     },
     plugins: [
