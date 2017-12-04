@@ -8,6 +8,10 @@ let FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin'); // 友好�
 let marked = require('marked');
 let renderer = new marked.Renderer();
 let hl = require('highlight.js');
+let names = require('./config/markdown.config');
+console.log('names:', names);
+
+
 let baseConfig = require('./webpack.base');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -50,14 +54,14 @@ module.exports = merge(baseConfig, {
     },
     output: {
         filename: '[name].js',
-        publicPath: '/',
+        publicPath: '',
         sourceMapFilename: '[name].map'
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
         new webpack.NamedModulesPlugin(),
-        new FriendlyErrorsPlugin()
+        // new FriendlyErrorsPlugin()
     ].concat(html)
 }, {
     module: {

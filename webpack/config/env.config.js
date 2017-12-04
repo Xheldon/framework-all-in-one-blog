@@ -7,7 +7,7 @@ module.exports = {
             PROCESS_ENV: JSON.stringify(process.env.NODE_ENV)
         },
         assetsRoot: path.resolve(__dirname, '../../build'),
-        assetsSubDir: 'dist',
+        assetsSubDir: '',
         prodSrcMap: true,
         prodGzip: false,
         prodGzipExt: ['js', 'css']
@@ -20,7 +20,7 @@ module.exports = {
         },
         assetsPublicPath: '/',
         assetsRoot: path.resolve(__dirname, '../../build'),
-        assetsSubDir: 'dist',
+        assetsSubDir: '',
         cssSourceMap: false
     }
 };

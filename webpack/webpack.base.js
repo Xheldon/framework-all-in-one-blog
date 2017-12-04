@@ -17,9 +17,6 @@ function resolve(dir) {
 }
 
 
-let fs = require('fs');
-
-
 let js = glob.sync('./src/vue/index.js').reduce((prev, curr) => {
     /*  注释: 为什么参数路径为 ./src 是因为该文件虽然路径是(相对 project) /webpack/webpack.base.js
         但是 node 执行的时候还是执行的是 /webpack.env.config.js, 因此路径应该相对为 webpack.env.config.js 所在的文件的相对路径, 即根目录
@@ -29,6 +26,7 @@ let js = glob.sync('./src/vue/index.js').reduce((prev, curr) => {
     prev[curr.slice(6, -3)] = [curr];
     return prev;
 }, {});
+console.log('js:', js);
 module.exports = {
     entry: js, // tips: js 为一个对象, 键可以带/, 会按目录生成
     output: {
@@ -82,6 +80,9 @@ module.exports = {
                 }
             }
         ]
+    },
+    node: {
+        fs: 'empty'
     }
 };
 
