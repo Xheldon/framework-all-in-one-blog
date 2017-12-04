@@ -18,7 +18,7 @@ process.env.NODE_ENV = process.env.NODE_ENV || 'prod';
 if (process.env.NODE_ENV === 'prod') {
     publicPath = '/'; // TODO: 设置线上地址
 } else {
-    publicPath = '/'
+    publicPath = ''
 }
 let html = Object.keys(baseConfig.entry).map((item) => {
     let arr = item.split('/');
