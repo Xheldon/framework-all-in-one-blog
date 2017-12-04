@@ -2,7 +2,7 @@
 let webpack = require('webpack');
 let path = require('path');
 let glob = require('glob');
-
+let marked = require("marked");
 // 配置文件
 let config = require('./config/env.config');
 let loaderConfig = require('./config/loader.config.js');
@@ -15,6 +15,10 @@ let projectRoot = path.resolve(__dirname,'../');
 function resolve(dir) {
     return path.join(__dirname, '..', dir)
 }
+
+
+let fs = require('fs');
+
 
 let js = glob.sync('./src/vue/index.js').reduce((prev, curr) => {
     /*  注释: 为什么参数路径为 ./src 是因为该文件虽然路径是(相对 project) /webpack/webpack.base.js
@@ -76,11 +80,6 @@ module.exports = {
                     limit: 10000,
                     name: loaderConfig.assetsPath('font/[name].[hash:7].[ext]')
                 }
-            },
-            {
-                test: /\.html$/,
-                loader: 'html-loader',
-                exclude: [resolve('src')]
             }
         ]
     }

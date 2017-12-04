@@ -4,8 +4,10 @@ let webpack = require('webpack');
 let config = require('./config/env.config');
 let merge = require('webpack-merge');
 let FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin'); // 友好的显示出那些出错了而没有编译成功
-
-
+// markdown 渲染
+let marked = require('marked');
+let renderer = new marked.Renderer();
+let hl = require('highlight.js');
 let baseConfig = require('./webpack.base');
 let HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -32,6 +34,7 @@ Object.keys(baseConfig.entry).forEach((name) => {
 });
 // console.log(baseConfig);
 
+
 module.exports = merge(baseConfig, {
     devtool: 'cheap-module-source-map',
     module: {
@@ -53,7 +56,30 @@ module.exports = merge(baseConfig, {
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
-        new webpack.NamedModulesPlugin()
-        // new FriendlyErrorsPlugin()
+        new webpack.NamedModulesPlugin(),
+        new FriendlyErrorsPlugin()
     ].concat(html)
+}, {
+    module: {
+        rules: [
+            {
+                test: /\.md$/,
+                use: [
+                    {
+                        loader: "html-loader"
+                    },
+                    {
+                        loader: "markdown-loader",
+                        options: {
+                            renderer,
+                            highlight: function (code) {
+                                return hl.highlightAuto(code).value;
+                            },
+                            langPrefix: 'hljs ' // 使用类名
+                        }
+                    }
+                ]
+            }
+        ]
+    }
 });

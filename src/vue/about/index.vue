@@ -1,17 +1,13 @@
 <template>
     <div>
         {{data}}
-        <div v-html="md" id="markdown"></div>
     </div>
 </template>
 <script>
-    import md from 'src/common/md/markdown.md';
-
     export default {
         data () {
             return {
-                data: '这个是文章页',
-                md
+                data: '这个是关于页面'
             }
         }
     }

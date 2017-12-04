@@ -4,10 +4,11 @@
     </div>
 </template>
 <script>
+
     export default {
         data () {
             return {
-                data: '这个是首页'
+                data: '这个是首页列表'
             }
         }
     }

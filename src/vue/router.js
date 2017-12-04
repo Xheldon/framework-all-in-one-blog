@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Index from './index/index.vue';
+import About from './about/index.vue';
 import Post from './post/index.vue';
 
 Vue.use(VueRouter);
@@ -9,6 +10,11 @@ const routes = [
         path: '/',
         component: Index,
         name: 'home'
+    },
+    {
+        path: '/about',
+        component: About,
+        name: 'about'
     },
     {
         path: '/post',
