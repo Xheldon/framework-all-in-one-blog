@@ -35,7 +35,7 @@ let out = fs.createWriteStream(path.resolve(__dirname, '../src/common/md/post-li
     encoding: 'utf8'
 });
 let md = glob.sync('./src/common/md/*.md');
-out.write('module.exports = [');
+out.write('module.exports = {\n');
 let stdout;
     for (let i = 0; i < md.length; i++) {
         if (md[i]) {
@@ -43,9 +43,9 @@ let stdout;
             md[i] = md[i].slice(16);
             stdout = stdout.replace('\n', '').replace('# ', '');
             if (i == (md.length -1)) {
-                out.write(`['${md[i]}', '${stdout}']];`);
+                out.write(`    '${md[i]}': '${stdout}'\r\n};`);
             } else {
-                out.write(`['${md[i]}','${stdout}'],\r\n`);
+                out.write(`    '${md[i]}':'${stdout}',\r\n`);
             }
         }
     }

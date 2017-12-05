@@ -1,8 +1,8 @@
 <template>
     <div>
         <ul>
-            <li v-for="item in list">
-                <router-link :to="{path: '/post', query: {title: item[0]}}">{{item[1]}}</router-link>
+            <li v-for="(name, link) in list">
+                <router-link :to="{path: '/post', query: {title: link}}">{{name}}</router-link>
             </li>
         </ul>
     </div>

@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "export NODE_ENV=dev && node webpack/dev-server/server.js",
-    "build": "export NODE_ENV=prod && rm -rf build/ && webpack"
+    "build": "export NODE_ENV=prod && rm -rf build/ && webpack",
+    "publish": "export NODE_ENV=prod && rm -rf build/ && webpack && git add . && git commit -am 'auto publish by auto' && git push origin devlelop"
   },
   "repository": {
     "type": "git",
