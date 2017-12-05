@@ -6,7 +6,7 @@ module.exports = {
             NODE_ENV: 'prod',
             PROCESS_ENV: JSON.stringify(process.env.NODE_ENV)
         },
-        assetsRoot: path.resolve(__dirname, '../../build'),
+        assetsRoot: path.resolve(__dirname, '../../docs'),
         assetsSubDir: '',
         prodSrcMap: true,
         prodGzip: false,
@@ -19,7 +19,7 @@ module.exports = {
             PROCESS_ENV: JSON.stringify(process.env.NODE_ENV)
         },
         assetsPublicPath: '/',
-        assetsRoot: path.resolve(__dirname, '../../build'),
+        assetsRoot: path.resolve(__dirname, '../../docs'),
         assetsSubDir: '',
         cssSourceMap: false
     }
