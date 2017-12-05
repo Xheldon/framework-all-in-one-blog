@@ -51,6 +51,7 @@ let html = Object.keys(baseConfig.entry).map((item) => {
 module.exports = webpackMerge(baseConfig, {
     output: {
         publicPath: publicPath,
+        chunkFilename: 'vue/async/[name].js', // md 文件被异步加载为 js 文件
     },
     module: {
         rules: loaderConfig.styleLoaders({sourceMap: config.dev.cssSourceMap})
