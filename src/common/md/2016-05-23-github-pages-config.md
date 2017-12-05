@@ -1,7 +1,5 @@
----
-layout: post
-title:  "博客域名优化配置说明"
-categories: [Others]
+# 博客域名优化配置说明
+### 分类: [Others]
 ---
 
 决定在 `GitHub Pages` 搞个静态博客的时候, 我就想要尽可能的加快打开速度, 因此使用了一些雕虫小技来加快打开速度, 提高用户体验.
@@ -45,13 +43,13 @@ categories: [Others]
 | A | www | 192.30.252.153 |
 | MX | @ | mxdomain.qq.com. |
 | CNAME | qqmailhash | mail.qq.com. |
-| 隐形URL | @ | http://www.xheldon.com |
+| 隐形URL | @ | www.xheldon.com |
 
 同时将博客分支目录的 `CNAME` 文件从 `xheldon.com` 改成了 `www.xheldon.com` 然后发现从搜索引擎访问博客的话, 比如 `xheldon.com/about/`, 确实是跳转到了这个博客, 但是仅仅停留在首页! 也就是说, 之前被搜索引擎抓取的任何链接都只停留在首页 `www.xheldon.com` 这个地方, 这就意味着, 隐性转发的作用其实是对特定的地址做跳转, 并不会将地址后的路径自动加上去, 就比如我的情况, 隐形 `URL` 转发, 设置了从 `xheldon.com` 转发到 `www.xheldon.com` 之后, 所有的访问 `xheldon.com/xxxx` 的请求, 也都被转发到了 `www.xheldon.com`, 而不是期望的 `www.xheldon.com/xxxx`.
 
 此时 `dig xheldon.com`:
 
-{%highlight js%}
+```javascript
 ; <<>> DiG 9.8.3-P1 <<>> xheldon.com
 ;; global options: +cmd
 ;; Got answer:
@@ -68,7 +66,7 @@ xheldon.com.		585	IN	A	42.156.141.13
 ;; SERVER: 172.168.200.110#53(172.168.200.110)
 ;; WHEN: Thu Mar 30 10:06:41 2017
 ;; MSG SIZE  rcvd: 45
-{% endhighlight%}
+```
 
 发现顶级域名指向的是阿里云的一个 `IP`.
 
@@ -89,7 +87,7 @@ xheldon.com.		585	IN	A	42.156.141.13
 
 这个时候 `dig www.xheldon.com` 发现:
 
-{%highlight js%}
+```javascript
 ; <<>> DiG 9.8.3-P1 <<>> www.xheldon.com
 ;; global options: +cmd
 ;; Got answer:
@@ -108,11 +106,11 @@ github.map.fastly.net.  28  IN      A      151.101.100.133
 ;; SERVER: 172.168.200.110#53(172.168.200.110)
 ;; WHEN: Thu Mar 30 10:20:30 2017
 ;; MSG SIZE  rcvd: 115
-{% endhighlight%}
+```
 
 `dig xheldon.com` 发现: 
 
-{%highlight js%}
+```javascript
 ; <<>> DiG 9.8.3-P1 <<>> xheldon.com
 ;; global options: +cmd
 ;; Got answer:
@@ -130,7 +128,7 @@ xheldon.com.		600	IN	A	192.30.252.153
 ;; SERVER: 172.168.200.110#53(172.168.200.110)
 ;; WHEN: Thu Mar 30 12:32:23 2017
 ;; MSG SIZE  rcvd: 61
-{% endhighlight%}
+```
 
 
 

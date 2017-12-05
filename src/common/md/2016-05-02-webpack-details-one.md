@@ -1,7 +1,5 @@
----
-layout: post
-title:  "Webpack 异步按需加载"
-categories: [Webpack,Framework]
+# Webpack 异步按需加载
+### 分类: [Webpack,Framework]
 ---
 
 webpack 想要实现异步加载, 即先加载主要模块, 用到某个模块或者多个模块(也即打包后的 chunk )的时候再发送请求加载.
@@ -12,7 +10,7 @@ webpack 想要实现异步加载, 即先加载主要模块, 用到某个模块�
 
 这些文件没有打包在 `bundle.js` 中, 而且只被部分(非全部的)模块依赖, 同时又需要异步加载, 因此就会通过使用 `require.ensure` 被打包到额外的 `js` 中, 而这些 `js`, 仍然是通过最终的 `bundle.js` 创建 `script` 标签, 然后被 `append` 到页面中的:
 
-{%highlight js%}
+```javascript
 // This file contains only the entry chunk.
 // The chunk loading function for additional chunks
 __webpack_require__.e = function requireEnsure(chunkId, callback) {
@@ -36,7 +34,7 @@ __webpack_require__.e = function requireEnsure(chunkId, callback) {
         head.appendChild(script);
     }
 };
-{% endhighlight%}
+```
 
 OK, 这些理解起来都很容易, 但是查看<a href="http://webpack.github.io/docs/code-splitting.html#defining-a-split-point" target="_blank">官方文档</a>的时候, 发现了几个需要注意的细节.
 
@@ -46,7 +44,7 @@ OK, 这些理解起来都很容易, 但是查看<a href="http://webpack.github.i
 
 但是 `CommonJS` 加载数组中模块的时候, 是只加载不执行, 除非是在 `callback` 中, 又 `require` 了一遍才执行: 
 
-{%highlight js%}
+```javascript
 require(['./other/ensure.js','./other/ensure2.js'], function(){
     var ensure = require('./other/ensure.js');
     var ensure2 = require('./other/ensure2.js');
@@ -54,7 +52,7 @@ require(['./other/ensure.js','./other/ensure2.js'], function(){
     module1();
     module2();
 }, chunkFilename);
-{% endhighlight%}
+```
 
 > The require.ensure method ensures that every dependency in dependencies can be synchronously required when calling the callback. An implementation of the require function is sent as a parameter to the callback.
 
@@ -64,12 +62,12 @@ require(['./other/ensure.js','./other/ensure2.js'], function(){
 
 而 `AMD` 因为是正常一贯的依赖前置, 所以其会在 `require` 的时候就执行模块: 
 
-{%highlight js%}
+```javascript
 require(['./other/ensure.js','./other/ensure2.js'], function(ensure, ensure2){
     ensure();
     ensure2();
 });
-{% endhighlight%}
+```
 
 OK, `AMD` 的例子不熟, 下面以 `CommonJS` 为例说明一些细节.
 
@@ -87,58 +85,58 @@ OK, `AMD` 的例子不熟, 下面以 `CommonJS` 为例说明一些细节.
 
 入口文件 `app.js` 的代码:
 
-{%highlight js%}
+```javascript
 
 require('../other/if_be_remove.js')();
 require.ensure(['../other/ensure.js'], function(){
 	require('../other/ensure.js')();
 }, 'love');
 
-{% endhighlight%}
+```
 
 
 另一个入口文件 `app2.js` 的代码:
 
-{%highlight js%}
+```javascript
 
 require('../other/if_be_remove.js')();
 require.ensure(['../other/ensure2.js'], function(){
 	require('../other/ensure2.js')();
 }, 'hate');
 
-{% endhighlight%}
+```
  
 `ensure.js` 的代码:
 
-{%highlight js%}
+```javascript
 
 require('./if_be_remove.js')();
 module.exports = function(){
 	console.log('i\'m be ensure!');	
 }
 
-{% endhighlight%}
+```
  
 `ensure2.js` 的代码:
 
-{%highlight js%}
+```javascript
 
 require('./if_be_remove.js')();
 module.exports = function(){
 	console.log('i\'m be ensure2!');	
 }
 
-{% endhighlight%}
+```
 
 最后, 在子 `chunk` 和父级 `chunk` 都存在的 `if_be_remove.js` 的代码:
 
-{%highlight js%}
+```javascript
 
 module.exports = function(){
 	console.log('im be removed!');	
 }
 
-{% endhighlight%}
+```
 
 看下 `Chrome` 浏览器控制台中 `Network` 中加载的 `js` 的内容(这里使用 `[id].[name].js` 的命名方式)
 

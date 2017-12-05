@@ -1,8 +1,6 @@
----
-layout: post
-title:  "新浪微博JS SDK API的使用"
+# 新浪微博JS SDK API的使用
 date:   2015-12-21 21:23:45 +0800
-categories: [Javascript]
+### 分类: [Javascript]
 ---
 
 以前整个网站都是老大一个人怼起来的,各种bug和各种细节不完善.所以打算重构一下,侯哥搭好了`seajs`的开发框架,因此我只需要写前端逻辑即可.
@@ -23,9 +21,9 @@ categories: [Javascript]
 	<html xmlns:wb=”http://open.weibo.com/wb”>
 
 引用jssdk文件:
-{% highlight html%}
+```html
 <script src=”http://tjs.sjs.sinajs.cn/open/api/js/wb.js?appkey=YOUR APPKEYdebug=true” type=”text/javascript” charset=”utf-8″></script>
-{% endhighlight%}
+```
 
 其中的`YOUR APPKEY`替换为你申请新浪微博开发者时它给你的`appid`, `debug=true`方便你调试,正式上线时可以把`&debug=true`这个给删掉.
 
@@ -64,7 +62,7 @@ categories: [Javascript]
 注意,最最重要的一步,即是你和新浪的数据交互的一步:
 
 一般`W.parseCMD`的用法是以下形式:
-{% highlight js%}
+```javascript
 W.parseCMD('/users/show.json', function(oResult, bStatus) {
   if(bStatus) {
   //to do something...
@@ -75,7 +73,7 @@ W.parseCMD('/users/show.json', function(oResult, bStatus) {
 	method : 'get',
 	cache_time : 30
   });
-{% endhighlight%}
+```
 其中`W.parseCMD()`的第一个参数`/user/show.json`可以换成其他的接口如:`/statuses/user_timeline.json`就可以读取这个借口的信息了,具体有哪些接口,而接口又能返回哪些数据,新浪自己给了个<a href="http://open.weibo.com/tools/apitest.php" target="_blank" rel="nofollow">微博API测试工具</a>注意:这个API测试工具的登陆界面有问题,请不要在这个页面登陆,而是先到微博首页登陆之后再在这个API测试工具的页面刷新即可.
 那个`screen_name`不是必须的,但是`screen_name`所在的{}必须保留,即使它是空的.
 

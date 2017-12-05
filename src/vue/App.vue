@@ -18,29 +18,36 @@
         }
     }
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
+    /*#main {*/
+        /*max-width: 1200px;*/
+    /*}*/
 
     #header-bar {
         position: fixed;
+        z-index: 999;
         top: 0;
         width: 100%;
         height: 40px;
         line-height: 40px;
         color: #fff;
-        background-color: darkgreen;
+        background-color: rgb(54, 73, 95);
     }
 
     #content {
         width: 100%;
-        margin-top: 40px;
-        position: absolute;
+        max-width: 1200px;
+        position: relative;
+        margin: 100px auto 0;
         bottom: 0;
         top: 0;
         #side-bar {
             width: 30%;
             float: left;
-            position: absolute;
-            background-color: dimgray;
+            z-index: 999;
+            position: fixed;
+            padding-top: 40px;
+            background-color: #f6f6f6;
             top: 0;
             right: 0;
             bottom: 0;

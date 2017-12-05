@@ -3,6 +3,8 @@ let webpack = require('webpack');
 let path = require('path');
 let glob = require('glob');
 let marked = require("marked");
+let exec = require('child_process').execSync; // 执行 shell 命令
+
 // 配置文件
 let config = require('./config/env.config');
 let loaderConfig = require('./config/loader.config.js');
@@ -28,24 +30,25 @@ let js = glob.sync('./src/vue/index.js').reduce((prev, curr) => {
     prev[curr.slice(6, -3)] = [curr];
     return prev;
 }, {});
-console.log('js:', js);
 
 let out = fs.createWriteStream(path.resolve(__dirname, '../src/common/md/post-list.js'), {
     encoding: 'utf8'
 });
 let md = glob.sync('./src/common/md/*.md');
 out.write('module.exports = [');
-    for (let i in md) {
+let stdout;
+    for (let i = 0; i < md.length; i++) {
         if (md[i]) {
+            stdout = exec('cat ' + md[i] +  '| head -n 1', {encoding: 'utf8'});
             md[i] = md[i].slice(16);
-            if (i === md.length -1) {
-                out.write(`'${md[i]}'`);
+            stdout = stdout.replace('\n', '').replace('# ', '');
+            if (i == (md.length -1)) {
+                out.write(`['${md[i]}', '${stdout}']];`);
             } else {
-                out.write(`'${md[i]}',\r\n`);
+                out.write(`['${md[i]}','${stdout}'],\r\n`);
             }
         }
     }
-out.write('];');
 out.end();
 
 

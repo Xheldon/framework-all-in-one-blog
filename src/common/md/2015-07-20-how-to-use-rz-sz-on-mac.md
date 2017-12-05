@@ -1,7 +1,5 @@
----
-layout: post
-title:  "Mac OS X 使用 sz/rz 命令下载/上传文件配置"
-categories: [Others]
+# Mac OS X 使用 sz/rz 命令下载/上传文件配置
+### 分类: [Others]
 ---
 
 `OS X` 自带的终端可以直接连接 `Linux` （相比之下, `Win` 的 `cmd` 就比较渣了）, 但是有个问题就是, 终端无法直接通过 `Zmodem` 来上传和下载文件, 这里就需要一款更强大的远程服务器连接工具: `iTerm` 的帮助了. 

@@ -8,8 +8,6 @@ let FriendlyErrorsPlugin = require('friendly-errors-webpack-plugin'); // 友好�
 let marked = require('marked');
 let renderer = new marked.Renderer();
 let hl = require('highlight.js');
-let names = require('./config/markdown.config');
-console.log('names:', names);
 
 
 let baseConfig = require('./webpack.base');

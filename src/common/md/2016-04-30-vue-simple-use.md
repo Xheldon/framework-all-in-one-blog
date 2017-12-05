@@ -1,7 +1,5 @@
----
-layout: post
-title:  "Vue + Webpack 组件式开发(练习环境)"
-categories: [Vue,Framework]
+# Vue + Webpack 组件式开发(练习环境)
+### 分类: [Vue,Framework]
 ---
 
 ### 前言
@@ -21,21 +19,21 @@ categories: [Vue,Framework]
 
 首先, 既然是 `webpack+vue`, 那相应的安装包少不了, 这里我们使用 `vue@2.2.4` 和 `webpack@1.12.2`: 
 
-{%highlight js%}
+```javascript
 npm install webpack@1.12.2 vue@2.2.4 --save-dev
-{% endhighlight%}
+```
 
 然后是 `babel` 和相应的 `loader`, 这里我们使用 `es2015` 这个配置, 用最新的就好:
 
-{%highlight js%}
+```javascript
 npm install babel bebel-core babel-loader babel-preset-es2015 --save-dev
-{% endhighlight%}
+```
 
 然后是 `webpack` 的必装 `loader`, `css-loader` 用来处理 `css` 中 `url()` 的资源, `style-loader` 用来将 `require` 的 `css` 抽出放到 `style` 标签中, 然后加到页面 `head` 部分. `html-webpack-plugin` 用来将入口文件 `js` 变成 `html`, 入口文件中的各种资源由各种 `loader` 处理后插入到它生成的 `html` 中, `extract-text-webpack-plugin` 用来将被 `js` 通过 `style` 标签 `append` 到 `head` 中的样式抽出到单独的 `.css` 文件中:
 
-{%highlight js%}
+```javascript
 npm install css-loader style-loader html-webpack-plugin extract-text-webpack-plugin@1.0.1 --save-dev
-{% endhighlight%}
+```
 
 然后是 `vue` 相关的东西, 因为一个 `.vue` 里面有至少有三个标签 `template/style/script`, 因此需要三个 `loader` 来处理, 再加上一个总的 `vue-loader`, 就是四个 `loader` ,这里: 
 
@@ -47,19 +45,19 @@ npm install css-loader style-loader html-webpack-plugin extract-text-webpack-plu
 
 `vue-loader` 用来处理 `.vue` 后缀的内容, 在遇到相关的内容时, 会调用上述三个相关的 `loader` 来处理.
 
-{%highlight js%}
+```javascript
 npm install vue-html-loader vue-loader vue-style-loader vue-template-compiler --save-dev
-{% endhighlight%}
+```
 
 最后就是开发用的 `webpack-dev-server`, 这里我们安装 `1.12.1` 版本:
 
-{%highlight js%}
+```javascript
 npm install webpack-dev-server --save-dev
-{% endhighlight%}
+```
 
 下面是总的 `package.json` 配置文件, 而具体的每个 `package.json` 字段的含义, 可以查看<a href="http://json.is/" target="_blank">这个网站</a>,
 
-{%highlight js%}
+```javascript
 {
   "name": "vue-components",
   "version": "0.0.1",
@@ -95,12 +93,12 @@ npm install webpack-dev-server --save-dev
     "webpack-dev-server": "^1.12.1"
   }
 }
-{% endhighlight%}
+```
 
 ### 项目说明
 
 Ok, 依赖安装完了, 接下来看下 `webpack` 配置, 因为是想尽快测试 `vue` 官方文档的组件部分, 所以一切从简了:
-{%highlight js%}
+```javascript
 var path = require('path');
 var webpack = require('webpack');
 var HtmlwebpackPlugin = require('html-webpack-plugin'); 
@@ -169,7 +167,7 @@ module.exports = {
     })
   ]
 };
-{% endhighlight%}
+```
 
 关于这个配置, 有点东西需要说一下.
 
@@ -177,7 +175,7 @@ module.exports = {
 
 编译前:
 
-{%highlight html%}
+```html
 <div id="app">
   Hello {{who}}
 </div>
@@ -186,11 +184,11 @@ module.exports = {
     el: '#app',
     data: {who: 'Vue'}
   })
-</script>{% endhighlight%}
+</script>```
 
 编译后:
 
-{%highlight js%}
+```javascript
 <div id="app"></div>
 <script>
   new Vue({
@@ -207,41 +205,41 @@ module.exports = {
     data: {who: 'Vue'}
   })
 </script>
-{% endhighlight%}
+```
 
 而 `vue` 使用 `compiler` 编译 `template` 后的 `js` 在运行的时候发现有 `render` 函数的话就直接执行 `render`, `template` 字段下的内容会被忽略. 而执行编译后的 `render` 的任务,是由 `vue.common.js` 完成的.因此:
 
-{%highlight js%}
+```javascript
 vue.js = vue.common.js + compiler.js
-{% endhighlight%}
+```
 
 所以, 如果你使用的是 `vue-router`, 它的 `package.json` 中的 `main` 字段是指向 `node_module/dist/vue.common.js` 的, 如果你直接复制这个到你的项目下, 运行的时候会提示你类似于 `vue.common.js` 的 `runtime` 错误之类的信息.
 
 其次需要说的是这个 `css-loader` 和 `style-loader` 以及 `vue-style-loader`, 有了 `style-loader` 为何还要个 `vue-style-loader` 呢? 看了下 `vue-style-loader` 的说明, 明白了其仅仅是一个 `style-loader` 的 `fork`, 但是为了单独处理 `.vue` 文件, 同时为了让用户配置 `vue` 更清晰, 将其加到了 `webpack@1.x` 的配置文件中的 `vue` 字段中. 可以通过将 `extract-text-webpack-plugin` 插件的配置从:
 
-{%highlight js%}  
+```javascript
 vue:{
   loaders: {
     css: ExtractTextPlugin.extract('vue-style-loader','css-loader')
   }
 }
-{% endhighlight%}
+```
 
 改成:
 
-{%highlight js%}  
+```javascript
 vue:{
   loaders: {
     css: ExtractTextPlugin.extract('style-loader','css-loader')
   }
 }
-{% endhighlight%}
+```
 
 发现编译后的结果一样证实.
 
 而默认情况下, `vue-loader` 是自动使用 `vue-style-loader` 的, 所以如果你不在 `.vue` 文件中 `@import` 任何 `css` , 那么你不需要手动把 `vue-loader-style` 放到 `vue.loaders` 字段中. `vue-loader` 会自动处理 `.vue` 文件中的 `style` 标签中的内容, 并将其放到 `style` 标签中插入页面. 而如果你需要在 `.vue` 文件中的 `style` 标签内 `@import css` 文件, 那么你就需要在 `module.exports.vue` 单独配置.可以通过把 `vue` 字段的 `vue-style-loader` 去掉来测试:
 
-{%highlight js%}
+```javascript
 module: {
   loaders:[
     {
@@ -255,7 +253,7 @@ vue:{
   //   css: 'vue-style-loader!css-loader'
   // }
 }
-{% endhighlight%}  
+```
 
 此外, 入口文件 `js` 中的 `require('xxx.css')` 是默认的 `module.exports.module.loader` 处理的, 这点可以通过在默认 `loader` 中使用 `extract` 插件, 而在 `module.exports.vue` 中不使用 `extract` 插件证实, 因为从结果可以发现, 入口文件中的 `css` 被提取了, 但是 `.vue` 中的 `@import` 来的 `css` 没有被提取.
 
@@ -293,7 +291,7 @@ OK, 聊完了配置文件, 再说说这个项目是怎么工作的.
 
 有同学会疑惑, 入口文件 `js` 是怎么找到同目录的 `html` 文件的呢? 其实这个在 `webpack.config.js` 配置文件就已经写好了: 
 
-{%highlight js%}
+```javascript
 plugins:[
   new HtmlwebpackPlugin({
     title: 'Vue component test',
@@ -302,7 +300,7 @@ plugins:[
     inject: true
   })
 ]
-{% endhighlight%}  
+```
 
 这个 `html` 生成的插件告诉 `js` 入口文件, 所需要的模板来自 `app` 下的 `xxx.html`, 而最后打包的 `bundle.js` 也是 `inject` 这个里面, 再生成最终的页面.
 

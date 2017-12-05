@@ -1,9 +1,8 @@
 <template>
     <div>
-        {{data}}
         <ul>
             <li v-for="item in list">
-                <router-link :to="{path: '/post', query: {title: item}}">{{item}}</router-link>
+                <router-link :to="{path: '/post', query: {title: item[0]}}">{{item[1]}}</router-link>
             </li>
         </ul>
     </div>
@@ -19,3 +18,8 @@
         }
     }
 </script>
+<style scoped lang="scss">
+    ul{
+        padding: 0 20px;
+    }
+</style>
