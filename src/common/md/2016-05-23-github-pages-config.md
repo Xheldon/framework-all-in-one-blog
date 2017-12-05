@@ -4,9 +4,9 @@
 
 决定在 `GitHub Pages` 搞个静态博客的时候, 我就想要尽可能的加快打开速度, 因此使用了一些雕虫小技来加快打开速度, 提高用户体验.
 
-### 优化
+## 优化
 
-#### 使用百度 CDN 服务和七牛静态资源托管
+## 使用百度 CDN 服务和七牛静态资源托管
 
 本博客使用了 `Bootstrap/jQuery/fontawsome` 这三个库/字体文件, 因为 `Bootstrap` 我根据实际情况, 自己修改了些许内容以更加配合排版, 因此没有使用第三方的 `CDN`, 而是放在了七牛的资源服务器上, `jQuery` 使用的则是百度的静态公共资源服务.
 
@@ -16,13 +16,13 @@
 
 说实话, 因为是静态博客, 所以请求带的 `Cookie` 不是很大, 因此将资源放到另一个二级域名的优化的作用不是很大, 不过聊胜于无.
 
-#### 将小资源直接放到页面中
+## 将小资源直接放到页面中
 
 我将一些小的 `css` 和 `js` 直接放到页面中, 如 `highlight.css` 和 `search.js`, 都通过 `style` 和 `script` 标签直接写到了页面中, 这样做的好处是很大的, 因为这两个文件小, 下载文件所需要的时间可以忽略不计, 如果使用外部引入的形式, 那么加载这两个文件的时间主要消耗在了 <a href="https://developers.google.com/web/tools/chrome-devtools/network-performance/reference#timing" target="_blank">`TTFB`</a> (需FQ)上了: 
 
 ![TTFB](http://img.xheldon.com/img/TTFB.png "TTFB")
 
-### 设置
+## 设置
 
 因为年轻的时候没有见过世面, 于是直接将本站的 `A` 记录的 `www` 指向了 `Github Pages` 的 `IP 192.30.252.154/192.30.252.153`, 而把顶级域名 `@` 错误的使用 `CNAME` 指向了 `xheldon.github.io.`, 其实如果你没有 `MX` 指向 `@` 的话, 这样做是 `OK` 的, 但是因为我想在写简历的时候搞的酷一点, 使用自己博客的域名作为邮箱, 然后使用了 `QQ` 邮箱提供的域名邮箱服务, 因此在做 `MX` 解析的时候, 需要将顶级域名 `@`
 指向腾讯的 `mxdomain.qq.com`, 这个时候就报错了, 阿里云提示说 `CNAME` 和 `MX` 不能都指向顶级域名 `@`, 具体原因可以<a href="https://www.zhihu.com/question/21128056" target="_blank">看这里</a>, 但是到现在博客已经迁移几个月了, 一些链接也已经被搜索引擎抓取过了, 现在再修改的话链接的话损失有点大. 
@@ -49,7 +49,7 @@
 
 此时 `dig xheldon.com`:
 
-```javascript
+```bash
 ; <<>> DiG 9.8.3-P1 <<>> xheldon.com
 ;; global options: +cmd
 ;; Got answer:

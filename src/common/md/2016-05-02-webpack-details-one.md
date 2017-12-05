@@ -38,7 +38,7 @@ __webpack_require__.e = function requireEnsure(chunkId, callback) {
 
 OK, 这些理解起来都很容易, 但是查看<a href="http://webpack.github.io/docs/code-splitting.html#defining-a-split-point" target="_blank">官方文档</a>的时候, 发现了几个需要注意的细节.
 
-### *`CommonJS`* 和 *`AMD`* `require` 时候的区别
+## *`CommonJS`* 和 *`AMD`* `require` 时候的区别
 
 `CommonJS` 是使用 `require.ensure([''], callback)` 来处理异步加载模块的, `AMD` 是和一般的 `AMD` 模块一样, 使用 `require` 一个数组依赖的形式处理的 `require([''], callback)`
 
@@ -73,7 +73,7 @@ OK, `AMD` 的例子不熟, 下面以 `CommonJS` 为例说明一些细节.
 
 首先, 如果给 `require.ensure` 传递一个 `callback` , 则在回调函数中 `require` 来的模块也会被全部打包到最终异步加载的文件中.
 
-### `chunk` 打包优化策略 
+## `chunk` 打包优化策略
 
 1. 如果两个 `chunk` 包含相同的模块, 那么他们将合并成一个.
 2. 如果一个模块在一个 `chunk` 的所有父级 `chunk` 都可用, 那么该模块将会在该 `chunk` 中被移除.
@@ -150,7 +150,7 @@ module.exports = function(){
 
 可以看到, 因为 `if_be_remove.js` 在两个 `chunk` 中, 即 `1-love.js` 和 `3.hate.js` 被引用, 而同时又被这两个 `chunk` 的父级, 也即 `app.js` 和 `app2.js` 引用, 因此在这两个 `chunk` 中, 没有出现 `if_be_remove.js` 的代码.
 
-### 补充: `chunk` 概念和定义
+## 补充: `chunk` 概念和定义
 
 这里再补充一下, 所谓 `chunk`, 指的是一个或者几个 `module` 组成的一个独立的 `js` 文件, 而 `chunk` 分为以下几个类型:
 

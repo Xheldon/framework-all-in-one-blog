@@ -6,7 +6,7 @@ Vue 学习总结基本告一个段落, 接下来会补充一些其他的碎片�
 
 <a href="https://github.com/Xheldon/Framework/tree/master/VueSPA" target="_blank">查看项目完整代码</a>(本项目含有其他 Vue 测试代码如 Vue Plugin 等)
 
-### 通过 render 函数
+## 通过 render 函数
 
 基本思路是, render 根据地址栏的路径渲染组件内容, 配合 HTML5 的 history.pushState 的使用, 以及 popstate 事件的监听, 可以实现直接访问地址/浏览器返回前进/点击链接跳转的路由功能.
 
@@ -23,7 +23,7 @@ Vue 学习总结基本告一个段落, 接下来会补充一些其他的碎片�
 
 可查看 <a href="https://github.com/Xheldon/Framework/tree/master/VueSPA/app/NoRouter" target="_blank">具体代码</a>
 
-### 通过 component 的 is 属性
+## 通过 component 的 is 属性
 
 其实原理和上面的一样, 只是把 render 函数换成了component.
 
@@ -42,7 +42,7 @@ component 组件有个 is 属性, 用来指示该 component 加载哪一个模�
 
 可查看 <a href="https://github.com/Xheldon/Framework/tree/master/VueSPA/app/NoRouterWithIs" target="_blank">具体代码</a>
 
-### 通过 VueRouter 插件
+## 通过 VueRouter 插件
 
 VueRouter 是官方插件, 完美实现了各种需求.
 

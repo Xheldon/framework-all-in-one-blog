@@ -2,11 +2,11 @@
 ### 分类: [Javascript]
 ---
 
-### 本文由来
+## 本文由来
 
 看网上某篇 `CORS` 资料的时候, 被一句话迷惑了: '注意, 设置了 `withCredentials = true` 之后, 携带的 `cookie` 是目标域的 `cookie`', 我十分不解: 当前域假设为 `a.com` 发送 `xhr` 到 `b.com`, 当然是把源域 `a.com` 的 `cookie`, 发送给 `b.com` 来处理啊, 怎么会携带的是目标域(这里我理解为 `b.com`)的 `cookie` 呢? 因此我开始了探究(先说结论: 我查看的资料的说法确实是正确的, 携带的确实是目标域 `b.com` 的 `cookie`).
 
-### 小目标-1: 简单请求下让 `a.com` 发送 `ajax` 到 `b.com`
+## 小目标-1: 简单请求下让 `a.com` 发送 `ajax` 到 `b.com`
 
 什么是简单请求请自行谷歌/SO. 这里注意一个基本事实, `cookie` 是跟随着 `域名` 的, 而不是跟随着 `IP地址`, 我在本地起了一个简单的能处理 `cookie` 的 `express` 服务, 同时在我的 `VPS` 上也起了一个相同的服务, 然后通过修改 `hosts` 来实现不同的域名:
 
@@ -91,7 +91,7 @@ app.get('/', function(req, res, next){
 
 控制台没有报错, 而且状态码为 `200` 说明 `b.com` 已经允许来自 `a.com:9090` 的请求.
 
-### 小目标-2: 本地服务接收前端的 `cookie`
+## 小目标-2: 本地服务接收前端的 `cookie`
 
 接下来我们先在本地测试下 `a.com` 后端能否获取到来自前端的 `cookie`:
 
@@ -111,7 +111,7 @@ document.cookie = 'lover=xiaodan';
 
 OK 没毛病, 访问 `www.a.com:9090` 的时候确实带上了 `cookie`, 意料之中.
 
-### 小目标-3: 把 `a.com` 的 `cookie` 发送到 `b.com`
+## 小目标-3: 把 `a.com` 的 `cookie` 发送到 `b.com`
 
 这个时候 `a.com` 的页面是有 `cookie` 的, 因此我们再次点击按钮, 看 `ajax` 请求能否把 `cookie` 传递给 `b.com`:
 
@@ -119,7 +119,7 @@ OK 没毛病, 访问 `www.a.com:9090` 的时候确实带上了 `cookie`, 意料�
 
 和没有加 `cookie` 一样, 并没有获取到来自 `a.com` 的 `cookie`, 这当然是因为安全限制, 也是意料之中.
 
-### 额外定一个小目标: 非简单请求
+## 额外定一个小目标: 非简单请求
 
 此处插播一个关于简单请求的测试, 在 `xhr` 中新增一个 `header`, 之后再发请求: 
 
@@ -185,7 +185,7 @@ app.get('/', function(req, res, next){
 
 分析原因在于(待求证, 回头翻翻 `HTTP` 权威指南再说), 非简单请求的 `prelight` 请求, 不会发起实际请求, 而是先发送一个预检请求, 来测试服务器是否支持某个非简单 `header` 字段, 也就是说, 带有非简单头部的请求不会走到 `app.get('/')` 里面. 同时可以在 `b.com` 的服务器看到, 因为 `console.log(req.headers)` 是写在 `app.get('/')` 里面的, 刚刚的请求 `b.com` 服务器并没有输出任何东西, 因此也印证了这一点. `这一设计旨在确保服务器对 CORS 标准知情，以保护不支持 CORS 的旧服务器`. 
 
-### 小目标-4: 把 `a.com`  域下的 `cookie` 发送到 `b.com`
+## 小目标-4: 把 `a.com`  域下的 `cookie` 发送到 `b.com`
 
 OK, 插播结束, 我们来测试下在客户端, 也即 `a.com` 下发起的 `xhr` 请求的页面设置 `withCredentials = true` (只列出 `xhrSend` 部分)能否将 `a.com` 的 `cookie` 发送到 `b.com`(这里简单请求和非简单请求是一样的结果, 为了方便查看差异我把 `xhr` 设置的 `header` 去掉了):
 
@@ -327,7 +327,7 @@ OK, 我们首先访问 `b.com`:
 
 文章开始的那句话得到了证实.
 
-### 小目标-5: `a.com` 的 `JavaScript` 获取 `b.com` 的 `cookie`:
+## 小目标-5: `a.com` 的 `JavaScript` 获取 `b.com` 的 `cookie`:
 
 既然能在 `a.com` 发送 `b.com` 的 `cookie`, 那么前端能不能获取到 `b.com` 的 `cookie` 呢?
 
@@ -423,7 +423,7 @@ xhr.onreadystatechange = function(){
 
 所以这个小目标是实现不了了, 但是 `SO` 社区给出了一些解决办法, 比如 使用第三方服务/后端做转发 等, 毕竟规定是死的, 人是活的, 就像 `jsonp` 一样, 是吧.
 
-### 联想
+## 联想
 
 有人说培训几个月零基础就可以精通某种语言, 我觉得是天方夜谭. 因为在没有计算机基础知识的情况下, 在搞不清二进制/编译原理/计算机原理/操作系统原理/网络基础/通讯协议的是什么概念的情况下能写出代码, 只能说明你照葫芦画瓢的学习能力强, 你知道这么写是这么个效, 但是你不知道为什么这么写就会出现这么个效果. 
 
@@ -458,7 +458,7 @@ xhr.onreadystatechange = function(){
 
 
 
-### 后记
+## 后记
 
 为什么说, 第三方广告 `cookie` 会泄露隐私呢? 这是因为广告放在一个 `A` 网站上, 广告主就知道这个广告投放到了 `A` 网站(通过广告投放的 `id/key` 之类的 `identity` 来标识 和付费), 于是广告主在这个广告上设置一个 `cookie`, 这个广告来自广告 `B` 的域名, 因此设置的 `cookie` 当然是来自 `B` 的 `cookie`, 每次 `A` 网站加载这个广告的时候, 肯定是要执行一段 `js` 的, 在这个 `js` 中, 设置了允许 `A` 站发送 `cookie`, 而同时 `B` 站也允许来自 `A` 站的 `cookie` 携带 `B` 站的 `cookie` 发送过来, 因此就什么都知道了.
 
@@ -468,7 +468,7 @@ xhr.onreadystatechange = function(){
 
 ![googleWithCredientials2](http://img.xheldon.com/img/googleWithCredentials2.png "googleWithCredientials2")
 
-### 注意
+## 注意
 
 1. 上述修改涉及到服务端的修改, 均需要重启服务. 因为在 `VPS` 上重启服务不太方便, 而且时间久了连接会断开, 因此最好的办法是在 `VPS` 上放置文章中的 `a.com` (主要用来修改 `index.html` 的), 而在本地放置文章中的 `b.com` 的内容(主要用来修改 `index.js` 的).
 

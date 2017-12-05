@@ -108,7 +108,7 @@ CEFB3783 B2E1BA96 71AAF7B4 AFB61B1D
 	> 完成后即可执行 `bundle exec jekyll serve` 查看本地起的 `jekyll`(如果提示找不到 bundle 命令, 重新执行第五六步即可)
 
 
-### 其他
+## 其他
 
 可能需要的操作:
 

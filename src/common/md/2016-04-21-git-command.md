@@ -209,7 +209,7 @@ git stash drop stash_name
 
 暂时能想到的就这么多吧，如果不熟悉，还是用`Sourcetree`吧。
 
-### 更新
+## 更新
 
 `git revert/reset/rebase` 只看说明是搞不懂的, 需要你自己输入命令测试一下. 
 

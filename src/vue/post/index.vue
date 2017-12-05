@@ -7,15 +7,14 @@
     export default {
         data () {
             return {
-                md: ''
+                md: '',
+                title: this.$route.query.title
             }
         },
         mounted () {
-            let query = document.location;
-            if (query.hash.split('=')[1]) {
-                let name = query.hash.split('=')[1];
+            if (this.title) {
                 // TODO: 将异步 require 来的 js 放到单独的文件夹中
-                import('src/common/md/'+name).then((md) => {
+                import('src/common/md/' + this.title).then((md) => {
                     this.md = md;
                 });
             }
