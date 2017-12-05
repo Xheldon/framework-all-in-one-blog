@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Xheldon/framework-all-in-one-blog.svg?branch=master)](https://travis-ci.org/Xheldon/framework-all-in-one-blog)
+
 # framework-all-in-one-blog
 use popular framework to reconsitution my little blog.
 
