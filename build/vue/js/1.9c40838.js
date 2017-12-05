@@ -1,0 +1,1 @@
+webpackJsonp([1],{52:function(n,h){n.exports='<h1 id="-">新博客地址说明</h1>\n<h3 id="-others-">分类: [Others]</h3>\n<hr>\n<p>博客迁移至此，丢了很多之前写的东西，xml转json不好用，只能手动复制粘贴恢复了。</p>\n<p>目前只恢复了几篇，从搜索引擎过来的朋友，请见谅。</p>\n'}});
