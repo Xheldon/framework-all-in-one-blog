@@ -13,11 +13,11 @@ function notity(err) {
 
 gulp.task('serve', /*['sass', 'babel'],*/ function () {
     browserSync.init({
-        server: "./build/"
+        server: "./docs/"
     });
-    gulp.watch("build/vue/*.css").on('change', browserSync.reload);
-    gulp.watch("build/vue/*.js").on('change', browserSync.reload);
-    gulp.watch("build/vue/*.html").on('change', browserSync.reload);
+    gulp.watch("docs/vue/*.css").on('change', browserSync.reload);
+    gulp.watch("docs/vue/*.js").on('change', browserSync.reload);
+    gulp.watch("docs/vue/*.html").on('change', browserSync.reload);
 });
 
 // Compile sass into CSS & auto-inject into browsers
