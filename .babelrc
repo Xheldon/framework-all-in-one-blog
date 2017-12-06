@@ -4,8 +4,7 @@
     "stage-2"
   ],
   "plugins": [
-//    "transform-runtime", // https://babeljs.io/docs/plugins/transform-runtime/
-    "syntax-dynamic-import"
+    "transform-runtime" // https://babeljs.io/docs/plugins/transform-runtime/
   ],
   "comments": false
 }

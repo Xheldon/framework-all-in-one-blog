@@ -20,7 +20,6 @@ module.exports = () => {
             name = md[i].slice(11, -3);
             title = title.replace('\n', '').replace('# ', '');
             pageName = md[i].slice(0, -3);
-            console.log(time, name);
             if (time && name) {
                 if (i === md.length - 1) {
                     out.write(`    '${name}.html': ['post', '${title}', '${time}', '${md[i]}']\r\n};`);
