@@ -20,7 +20,7 @@ function resolve(dir) {
 }
 
 
-let js = glob.sync('./src/vue/index.js').reduce((prev, curr) => {
+let js = glob.sync('./src/vue/index.jsx').reduce((prev, curr) => {
     /*  注释: 为什么参数路径为 ./src 是因为该文件虽然路径是(相对 project) /webpack/webpack.base.js
         但是 node 执行的时候还是执行的是 /webpack.env.config.js, 因此路径应该相对为 webpack.env.config.js 所在的文件的相对路径, 即根目录
         这个跟 __dirname 这个全局变量返回的是当前文件目录, 即 webpack.base.js 所在的目录, 即/webpack 略有不同.
@@ -39,7 +39,7 @@ module.exports = {
         // TODO: publicPath 路径暂时不填
     },
     resolve: {
-        extensions: ['.js', '.vue', '.json'], // 可以使 require 模块的时候不用写中的后缀如 require('a.js') 只需要写 require('a');
+        extensions: ['.js', '.vue', 'jsx', '.json'], // 可以使 require 模块的时候不用写中的后缀如 require('a.js') 只需要写 require('a');
         // modules: [ // 告诉 webpack 解析模块应该搜索的目录, 默认为 node_module, 此配置 src 目录优先于 node_module 搜索
         //     // resolve('src'),
         //     'node_modules',
@@ -62,7 +62,7 @@ module.exports = {
                 options: loaderConfig.vueLoader
             },
             {
-                test: /\.js$/,
+                test: /\.js|.jsx$/,
                 loader: 'babel-loader',
                 include: [resolve('src')]
             },
