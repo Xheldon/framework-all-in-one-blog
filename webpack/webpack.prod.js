@@ -7,6 +7,8 @@ let HtmlwebpackPlugin  =require('html-webpack-plugin');
 let UglifyJsParallelPlugin = require('webpack-parallel-uglify-plugin');
 let OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 let ExtractTextPlugin = require('extract-text-webpack-plugin');
+let CopyWebpackPlugin = require('copy-webpack-plugin');
+let path = require('path');
 
 let publicPath = '';
 let marked = require('marked');
@@ -80,6 +82,13 @@ module.exports = webpackMerge(baseConfig, {
         new ExtractTextPlugin({
             filename: loaderConfig.assetsPath('[name].[hash:7].css')
         }),
+        new CopyWebpackPlugin([{
+            from: path.resolve(__dirname, '../index.html'),
+            to: path.resolve(__dirname, '../docs/')
+        }, {
+            from: path.resolve(__dirname, '../CNAME'),
+            to: path.resolve(__dirname, '../docs/')
+        }])
     ].concat(html),
     bail: true // ??? 待查
 }, {
