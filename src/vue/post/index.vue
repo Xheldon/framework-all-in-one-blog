@@ -5,6 +5,7 @@
 </template>
 <script>
     let fileListObj = require('src/common/md/post-list');
+//    不能使用 静态导入的 import, 否则下面的动态导入 import 会报找不到 fileListObj, 除非 import 之后再赋值给一个变量
 
     export default {
         data () {
