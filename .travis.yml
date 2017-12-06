@@ -1,7 +1,7 @@
 delpoy:
   provider: pages
   skip_cleanup: true
-  github_token: obx8Rq5kskRyNgCvibyq
+  github_token: $GITHUB_TOKEN
   on:
     branch: master
   github_url: blog.xheldon.com
@@ -15,13 +15,9 @@ cache:
 env:
     - NODE_ENV=prod
 after_success:
-    if [ -n "$GITHUB_API_KEY" ]; then
-        cd "$TRAVIS_BUILD_DIR"
-        cd docs
-        git init
-        git checkout -b gh-pages
-        git add .
-        git -c user.name='travis' -c user.email='travis' commit -m init
-        git push -f -q https://Xheldon:$GITHUB_API_KEY@github.com/Xheldon/framework-all-in-one-blog-gh-pages gh-pages &2>/dev/null
-        cd "$TRAVIS_BUILD_DIR"
-      fi
+    - cd docs
+    - git init
+    - git checkout -b gh-pages
+    - git add .
+    - git -c user.name='travis' -c user.email='travis' commit -m init
+    - git push -f -q https://Xheldon:$GITHUB_API_KEY@github.com/Xheldon/framework-all-in-one-blog-gh-pages gh-pages &2>/dev/null
