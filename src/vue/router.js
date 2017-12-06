@@ -28,7 +28,8 @@ const router = new VueRouter({
 
 router.afterEach(route => {
     // 处理文章页没有参数情况
-    if ((!route.query.title && route.name === 'post') || (!fileListArr.includes(route.query.title))) {
+    console.log(route);
+    if ((!route.query.title && route.name === 'post') || (!fileListArr.includes(route.params.name))) {
         router.push({path: '/'});
     }
 });

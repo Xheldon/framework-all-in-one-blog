@@ -3,7 +3,8 @@ let webpack = require('webpack');
 let path = require('path');
 let glob = require('glob');
 let marked = require("marked");
-let exec = require('child_process').execSync; // 执行 shell 命令
+// 读取 markdown 目录, 并生成数据结构
+require('./config/data-structure.config')();
 
 // 配置文件
 let config = require('./config/env.config');
@@ -18,8 +19,6 @@ function resolve(dir) {
     return path.join(__dirname, '..', dir)
 }
 
-let fs = require('fs');
-
 
 let js = glob.sync('./src/vue/index.js').reduce((prev, curr) => {
     /*  注释: 为什么参数路径为 ./src 是因为该文件虽然路径是(相对 project) /webpack/webpack.base.js
@@ -30,28 +29,6 @@ let js = glob.sync('./src/vue/index.js').reduce((prev, curr) => {
     prev[curr.slice(6, -3)] = [curr];
     return prev;
 }, {});
-
-let out = fs.createWriteStream(path.resolve(__dirname, '../src/common/md/post-list.js'), {
-    encoding: 'utf8'
-});
-let md = glob.sync('./src/common/md/*.md');
-out.write('module.exports = {\n');
-let stdout;
-    for (let i = 0; i < md.length; i++) {
-        if (md[i]) {
-            stdout = exec('cat ' + md[i] +  '| head -n 1', {encoding: 'utf8'});
-            md[i] = md[i].slice(16);
-            stdout = stdout.replace('\n', '').replace('# ', '');
-            if (i == (md.length -1)) {
-                out.write(`    '${md[i]}': '${stdout}'\r\n};`);
-            } else {
-                out.write(`    '${md[i]}':'${stdout}',\r\n`);
-            }
-        }
-    }
-out.end();
-
-
 
 module.exports = {
     entry: js, // tips: js 为一个对象, 键可以带/, 会按目录生成

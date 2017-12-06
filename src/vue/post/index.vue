@@ -10,12 +10,12 @@
         data () {
             return {
                 md: '',
-                title: this.$route.query.title
+                name: this.$route.params.name
             }
         },
         mounted () {
-            if (this.title) {
-                import('src/common/md/' + this.title).then((md) => {
+            if (this.name) {
+                import('src/common/md/' + this.name).then((md) => {
                     this.md = md;
                 });
             }
