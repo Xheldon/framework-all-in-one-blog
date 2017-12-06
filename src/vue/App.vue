@@ -3,7 +3,8 @@
         <header-bar id="header-bar"></header-bar>
         <div id="content">
             <side-bar id="side-bar"></side-bar>
-            <router-view id="router-view"></router-view>
+            <!--加 key 防止重用-->
+            <router-view id="router-view" :key="$route.params.name"></router-view>
         </div>
     </div>
 </template>

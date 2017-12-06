@@ -60,7 +60,7 @@ module.exports = merge(baseConfig, {
         new webpack.HotModuleReplacementPlugin(),
         new webpack.NoEmitOnErrorsPlugin(),
         new webpack.NamedModulesPlugin(),
-        // new FriendlyErrorsPlugin()
+        new FriendlyErrorsPlugin()
     ].concat(html)
 }, {
     module: {

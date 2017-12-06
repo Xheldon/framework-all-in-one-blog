@@ -15,10 +15,15 @@ const routes = [
         name: 'home'
     },
     {
+        path: '/:name',
+        component: Post,
+        name: 'post'
+    }/*,
+    {
         path: '/post',
         component: Post,
         name: 'post'
-    }
+    }*/
 ];
 
 const router = new VueRouter({
@@ -29,8 +34,5 @@ const router = new VueRouter({
 router.afterEach(route => {
     // 处理文章页没有参数情况
     console.log(route);
-    if ((!route.query.title && route.name === 'post') || (!fileListArr.includes(route.params.name))) {
-        router.push({path: '/'});
-    }
 });
 export default router;

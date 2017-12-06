@@ -4,7 +4,7 @@
     </div>
 </template>
 <script>
-    import fileListObj from 'src/common/md/post-list';
+    let fileListObj = require('src/common/md/post-list');
 
     export default {
         data () {
@@ -14,8 +14,8 @@
             }
         },
         mounted () {
-            if (this.name) {
-                import('src/common/md/' + this.name).then((md) => {
+            if (Object.keys(fileListObj).includes(this.name)) {
+                import('src/common/md/' + fileListObj[this.name][3]).then((md) => {
                     this.md = md;
                 });
             }

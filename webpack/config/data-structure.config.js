@@ -23,15 +23,15 @@ module.exports = () => {
             console.log(time, name);
             if (time && name) {
                 if (i === md.length - 1) {
-                    out.write(`    '${md[i]}': ['post', '${title}', '${time}', '${name}']\r\n};`);
+                    out.write(`    '${name}.html': ['post', '${title}', '${time}', '${md[i]}']\r\n};`);
                 } else {
-                    out.write(`    '${md[i]}': ['post', '${title}', '${time}', '${name}'],\r\n`);
+                    out.write(`    '${name}.html': ['post', '${title}', '${time}', '${md[i]}'],\r\n`);
                 }
             } else {
                 if (i === md.length - 1) {
-                    out.write(`    '${md[i]}': ['page', '${pageName}']\r\n};`);
+                    out.write(`    '${pageName}.html': ['page', '${title}', '', '${md[i]}']\r\n};`);
                 } else {
-                    out.write(`    '${md[i]}': ['page', '${pageName}'],\r\n`);
+                    out.write(`    '${pageName}.html': ['page', '${title}', '', '${md[i]}'],\r\n`);
                 }
             }
         }
