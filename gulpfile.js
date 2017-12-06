@@ -35,7 +35,7 @@ gulp.task('serve', /*['sass', 'babel'],*/ function () {
 //             presets: ['es2015']
 //         }))
 //         .on('error', notity)
-//         .pipe(rename('index.jsx'))
+//         .pipe(rename('index.js'))
 //         .pipe(gulp.dest('app/js'))
 // });
 
