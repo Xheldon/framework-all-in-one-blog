@@ -20,7 +20,7 @@ function resolve(dir) {
 }
 
 
-let js = glob.sync('./src/vue/index.js').reduce((prev, curr) => {
+let js = glob.sync('./src/*/index.js').reduce((prev, curr) => {
     /*  注释: 为什么参数路径为 ./src 是因为该文件虽然路径是(相对 project) /webpack/webpack.base.js
         但是 node 执行的时候还是执行的是 /webpack.env.config.js, 因此路径应该相对为 webpack.env.config.js 所在的文件的相对路径, 即根目录
         这个跟 __dirname 这个全局变量返回的是当前文件目录, 即 webpack.base.js 所在的目录, 即/webpack 略有不同.

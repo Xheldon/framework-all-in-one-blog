@@ -51,9 +51,9 @@ module.exports = merge(baseConfig, {
         publicPath: '/'
     },
     output: {
-        filename: '[name]/[hash:7].js',
+        filename: '[name].[hash:7].js',
         publicPath: '/',
-        chunkFilename: 'vue/async/[name].[hash:7].js',// md 文件被异步加载为 js 文件
+        chunkFilename: 'common/async/[name].[hash:7].js',// md 文件被异步加载为 js 文件
         sourceMapFilename: '[name].map'
     },
     plugins: [
