@@ -38,7 +38,7 @@
 ## 使用方法
 
 1. `npm run install` 安装依赖
-2. `npm run dev` 启动开发环境, 访问 `localhost:8089` 即可查看, 支持修改后自动刷新浏览器
+2. `npm run dev` 启动开发环境, 访问 `localhost:8089/xxx` 即可查看, `xxx` 为 `vue/react/angular` 支持修改后自动刷新浏览器
 3. `npm run build` 打包生成静态资源文件, 放在 `docs` 目录
 4. `gulp` 运行默认的 `gulp serve` 任务, 将启动一个把 `docs/` 目录作为伺服内容的静态服务器
 
