@@ -94,6 +94,10 @@ module.exports = webpackMerge(baseConfig, {
             to: path.resolve(__dirname, '../docs/')
         }]),
         new webpack.optimize.CommonsChunkPlugin({
+            /* 用复数是因为, 只要在 entry 配置好需要提取的模块名字, 都能被打包进来, 需要注意的是
+            * 如果有多个 names 如 ['react', 'vue', 'common'] 则会在最后一个 common 中存在一个入口依赖函数
+            * 必须首先引用 names 数组的最后一个元素, 即 common 在每个页面才行, 否则会报 webpackJSONP 未定义
+            * */
             names: ['common'],
             filename: 'common/vendor.js'
         })
