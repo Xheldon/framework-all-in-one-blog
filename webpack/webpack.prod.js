@@ -35,7 +35,7 @@ let html = Object.keys(baseConfig.entry).map((item) => {
         filename: item + '.html',
         template: 'ejs-compiled-loader!' + loaderConfig.templateUrl,
         inject: false,
-        chunks: ['common', item],
+        chunks: ['common', item], // 每个页面有这两个 chunk, 可以通过 data 中 vendor 是否匹配判断是否为通用模块
         minify: { // 复制来的, 待查
             removeComments: true,
             collapseWhitespace: true,
