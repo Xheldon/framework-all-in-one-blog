@@ -28,13 +28,14 @@ let html = Object.keys(baseConfig.entry).map((item) => {
     return new HtmlwebpackPlugin({
         data: {
             build: true,
-            vendor: name + '/vendor',
-            entry: item
+            vendor: 'common', // 遇到入口名字是 common 的, 则标记为 vendor, 在放入 html 模板的时候, 始终加载
+            entry: item,
+            title: `Xheldon'blog - ${name} - project`
         },
         filename: item + '.html',
         template: 'ejs-compiled-loader!' + loaderConfig.templateUrl,
         inject: false,
-        // chunks: ['vendor', item],
+        chunks: ['common', item],
         minify: { // 复制来的, 待查
             removeComments: true,
             collapseWhitespace: true,
@@ -50,6 +51,8 @@ let html = Object.keys(baseConfig.entry).map((item) => {
         }
     });
 });
+
+baseConfig.entry['common'] = ['react', 'react-dom', 'react-router-dom']; // 配合 htmlwebpackplugin 插件, 提取 common 到单独的文件中
 
 module.exports = webpackMerge(baseConfig, {
     output: {
@@ -91,8 +94,8 @@ module.exports = webpackMerge(baseConfig, {
             to: path.resolve(__dirname, '../docs/')
         }]),
         new webpack.optimize.CommonsChunkPlugin({
-            name: 'vendor',
-            filename: 'vendor.js'
+            names: ['common'],
+            filename: 'common/vendor.js'
         })
     ].concat(html),
     bail: true // ??? 待查

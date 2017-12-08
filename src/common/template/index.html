@@ -19,12 +19,23 @@
 </head>
 <body>
 <div id="mount"></div>
-<% if (htmlWebpackPlugin.files.chunks.manifest) {%>
-<script defer src="<%- htmlWebpackPlugin.files.chunks.manifest.entry %>"></script>
-<%}%>
-<% if (htmlWebpackPlugin.files.chunks.vendor) {%>
-<script defer src="<%- htmlWebpackPlugin.files.chunks.vendor.entry %>"></script>
-<%}%>
+<div>
+    <% for (i in htmlWebpackPlugin.files){%>
+        <%= i%>
+    <%}%>
+</div>
+<div>
+    <% for (j in htmlWebpackPlugin.files.chunks){%>
+        <%= j%>
+    <%}%>
+</div>
+<!--<% if (htmlWebpackPlugin.files.chunks.manifest) {%>-->
+<!--<script defer src="<%- htmlWebpackPlugin.files.chunks.manifest.entry %>"></script>-->
+<!--<%}%>-->
+<!--<% if (htmlWebpackPlugin.files.chunks.common) {%>-->
+<!--htmlwebpackplugin读取webpack 入口文件叫做 common 的, 若存在, 则加载, 也可以直接写成下面下面读取参数可配置的形式-->
+<!--<script defer src="<%- htmlWebpackPlugin.files.chunks.common.entry %>"></script>-->
+<!--<%}%>-->
 <% if (htmlWebpackPlugin.files.chunks[htmlWebpackPlugin.options.data.vendor]) {%>
 <script defer src="<%- htmlWebpackPlugin.files.chunks[htmlWebpackPlugin.options.data.vendor].entry %>"></script>
 <%}%>

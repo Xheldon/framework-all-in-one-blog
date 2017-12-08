@@ -19,5 +19,5 @@ after_success:
     - git init
     - git checkout -b gh-pages
     - git add .
-    - git -c user.name='travis' -c user.email='travis' commit -m init
+    - git -c user.name='travis' -c user.email='travis' commit -m 'submit by travsi ci, keke~'
     - git push -f -q https://Xheldon:$GITHUB_API_KEY@github.com/Xheldon/framework-all-in-one-blog gh-pages

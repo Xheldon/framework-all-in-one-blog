@@ -22,7 +22,7 @@ let html = Object.keys(baseConfig.entry).map((item) => {
             build: false,
             vendor: name + '/vendor',
             entry: item,
-            title: 'Xheldon 博客' // TODO: 根据 所有 md 文件名字生成对应 title
+            title: `Xheldon'blog - ${name} - project`
         },
         filename: item + '.html',
         template: 'ejs-compiled-loader!' + loaderConfig.templateUrl,

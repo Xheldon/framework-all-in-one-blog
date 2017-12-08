@@ -2,8 +2,11 @@ let fs = require('fs');
 let exec = require('child_process').execSync; // 执行 shell 命令
 let path = require('path');
 let glob = require('glob');
+let ora = require('ora');
+let colors = require('colors');
 
 module.exports = () => {
+    const spinner = ora('Start creat article list:\r\n'.green.bgWhite).start();
     let out = fs.createWriteStream(path.resolve(__dirname, '../../src/common/md/post-list.js'), {
         encoding: 'utf8'
     });
@@ -33,7 +36,13 @@ module.exports = () => {
                     out.write(`    '${pageName}.html': ['page', '${title}', '', '${md[i]}'],\r\n`);
                 }
             }
+            if (time && name) {
+                spinner.succeed(`${name.green} has been add !`)
+            } else {
+                spinner.succeed(`${pageName.green} has been add !`)
+            }
         }
     }
     out.end();
+    spinner.stop('Create complete successly!'.green.bgWhite);
 };
