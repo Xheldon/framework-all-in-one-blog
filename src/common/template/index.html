@@ -19,16 +19,6 @@
 </head>
 <body>
 <div id="mount"></div>
-<div>
-    <% for (i in htmlWebpackPlugin.files){%>
-        <%= i%>
-    <%}%>
-</div>
-<div>
-    <% for (j in htmlWebpackPlugin.files.chunks){%>
-        <%= j%>
-    <%}%>
-</div>
 <!--<% if (htmlWebpackPlugin.files.chunks.manifest) {%>-->
 <!--<script defer src="<%- htmlWebpackPlugin.files.chunks.manifest.entry %>"></script>-->
 <!--<%}%>-->
