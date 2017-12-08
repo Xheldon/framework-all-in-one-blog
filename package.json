@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "export NODE_ENV=dev && node webpack/dev-server/server.js",
-    "build": "export NODE_ENV=prod && rm -rf docs/*/** && webpack"
+    "build": "export NODE_ENV=prod && rm -rf docs/** && webpack"
   },
   "repository": {
     "type": "git",

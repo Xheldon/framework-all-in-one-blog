@@ -34,6 +34,7 @@ let html = Object.keys(baseConfig.entry).map((item) => {
         filename: item + '.html',
         template: 'ejs-compiled-loader!' + loaderConfig.templateUrl,
         inject: false,
+        // chunks: ['vendor', item],
         minify: { // 复制来的, 待查
             removeComments: true,
             collapseWhitespace: true,
@@ -88,7 +89,11 @@ module.exports = webpackMerge(baseConfig, {
         }, {
             from: path.resolve(__dirname, '../CNAME'),
             to: path.resolve(__dirname, '../docs/')
-        }])
+        }]),
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor',
+            filename: 'vendor.js'
+        })
     ].concat(html),
     bail: true // ??? 待查
 }, {
