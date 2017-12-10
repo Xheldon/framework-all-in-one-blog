@@ -34,7 +34,7 @@ let cssLoaders = (options = {}) => {
     }
 
     return {
-        css: generateLoaders(['css']),
+        css: generateLoaders(['css?modules']), // 启用 css-modules
         postcss: generateLoaders(['css']),
         scss: generateLoaders(['css', 'sass'])
     }
