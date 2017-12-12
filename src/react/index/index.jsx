@@ -2,7 +2,7 @@ import React from 'react';
 import Style from './index.css';
 
 const Index = () => (
-    <div className={Style.shit}>
+    <div>
         首页
     </div>
 );

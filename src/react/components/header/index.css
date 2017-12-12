@@ -1,0 +1,18 @@
+.header {
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    color: #fff;
+    background-color: #282c34;
+}
+.header ul {
+    margin-left: 30%;
+}
+.header ul li {
+    width: 100px;
+    text-align: center;
+    float: left;
+}

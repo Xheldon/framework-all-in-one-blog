@@ -1,5 +1,5 @@
 import React from 'react';
-let fileListObj = require('../../common/md/post-list');
+import fileListObj from '../../common/md/post-list';
 
 export default class Post extends React.Component {
     constructor (prop) {
@@ -28,9 +28,7 @@ export default class Post extends React.Component {
     }
     render () {
         return (
-            <div>
-                <div dangerouslySetInnerHTML={{__html: this.state.md}}></div>
-            </div>
+            <div dangerouslySetInnerHTML={{__html: this.state.md}}></div>
         );
     }
 };
