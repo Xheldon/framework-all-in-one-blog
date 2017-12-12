@@ -1,3 +1,5 @@
 // 公共 css
-require('src/common/lib/css/darcula.css');
-require('src/common/lib/css/main.scss');
+import * as Style from 'src/common/lib/css/darcula.css';
+import 'src/common/lib/css/main.scss';
+
+console.log(Style);

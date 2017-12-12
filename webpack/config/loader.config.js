@@ -67,6 +67,11 @@ let styleLoaders = (options) => { // 待查
         let loader = loaders[extension];
         output.push({
             test: new RegExp('\\.' + extension + '$'),
+                include: path.resolve(__dirname, '../../vue'),
+                loader: loader
+        }, {
+            test: new RegExp('\\.' + extension + '$'),
+            exclude: path.resolve(__dirname, '../../react'),
             loader: loader
         });
     }
