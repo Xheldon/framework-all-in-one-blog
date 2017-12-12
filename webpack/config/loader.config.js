@@ -34,7 +34,7 @@ let cssLoaders = (options = {}) => {
     }
 
     return {
-        css: generateLoaders(['css?modules']), // 启用 css-modules
+        css: generateLoaders(['css?modules&localIdentName=[name]__[local]___[hash:base64:5]']), // 启用 css-modules
         postcss: generateLoaders(['css']),
         scss: generateLoaders(['css', 'sass'])
     }
@@ -67,11 +67,6 @@ let styleLoaders = (options) => { // 待查
         let loader = loaders[extension];
         output.push({
             test: new RegExp('\\.' + extension + '$'),
-                include: path.resolve(__dirname, '../../vue'),
-                loader: loader
-        }, {
-            test: new RegExp('\\.' + extension + '$'),
-            exclude: path.resolve(__dirname, '../../react'),
             loader: loader
         });
     }

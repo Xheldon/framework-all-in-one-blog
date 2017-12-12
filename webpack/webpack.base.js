@@ -59,7 +59,6 @@ module.exports = {
             {
                 test: /\.vue$/,
                 loader: 'vue-loader',
-                exclude: resolve('vue'),
                 options: loaderConfig.vueLoader
             },
             {

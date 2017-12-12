@@ -1,17 +1,15 @@
 import React from 'react';
 import fileListObj from '../../common/md/post-list';
 import '../style/index.js';
+// import 'src/common/lib/css/darcula.css';
 export default class Post extends React.Component {
     constructor (prop) {
         super(prop);
         this.state = {
             md: ''
         };
-        console.log(prop);
         let that = this;
         let name = fileListObj[prop.match.params.name][3];
-        console.log(fileListObj);
-        console.log(prop.match.params.name);
         require([`src/common/md/${name}`], function (html) {
             that.setState({
                 md: html
