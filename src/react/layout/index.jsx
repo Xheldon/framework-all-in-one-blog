@@ -1,7 +1,8 @@
 import React from 'react';
-import Headerbar from './components/header.jsx';
-import Sidebar from './components/sidebar.jsx';
-import Routerview from './router.jsx';
+import Headerbar from '../components/header/index.jsx';
+import Sidebar from '../components/sidebar/index.jsx';
+import Routerview from '../router-view/index.jsx';
+import Style from './index.css';
 
 // App 节点只能作为 #mount 的子节点存在,
 // 而不是像 Vue一样直接替换 #mount 元素
@@ -24,7 +25,7 @@ import Routerview from './router.jsx';
 // };
 const App = () => [
         <Headerbar key="headerbar" />,
-        <div key="content" id="content">
+        <div key="content" className={Style.content}>
             <Sidebar/>
             <Routerview />
         </div>

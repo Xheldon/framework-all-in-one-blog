@@ -16,5 +16,5 @@ module.exports = {
     'softerware-i-use-usually.html': ['post', '环境配置/常用软件汇总', '2016-07-08', '2016-07-08-softerware-i-use-usually.md'],
     'blog-reference.html': ['post', '新博客地址说明', '2099-01-01', '2099-01-01-blog-reference.md'],
     'about.html': ['page', '关于', '', 'about.md'],
-    'test.html': ['page', ' 使用 GitHub CI 和流行框架自动化构建一个博客', '', 'test.md']
+    'test.html': ['page', '说明', '', 'test.md']
 };

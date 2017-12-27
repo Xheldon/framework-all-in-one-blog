@@ -34,7 +34,7 @@ let cssLoaders = (options = {}) => {
     }
 
     return {
-        css: generateLoaders(['css']),
+        css: generateLoaders(['css?modules&localIdentName=[name]__[local]___[hash:base64:5]']), // 启用 css-modules
         postcss: generateLoaders(['css']),
         scss: generateLoaders(['css', 'sass'])
     }

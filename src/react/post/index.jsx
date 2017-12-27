@@ -1,6 +1,7 @@
 import React from 'react';
-let fileListObj = require('../../common/md/post-list');
-
+import fileListObj from '../../common/md/post-list';
+import '../style/index.js';
+// import 'src/common/lib/css/darcula.css';
 export default class Post extends React.Component {
     constructor (prop) {
         super(prop);
@@ -8,8 +9,8 @@ export default class Post extends React.Component {
             md: ''
         };
         let that = this;
-        let name = fileListObj[Object.keys(fileListObj)[4]];
-        require([`src/common/md/${name[3]}`], function (html) {
+        let name = fileListObj[prop.match.params.name][3];
+        require([`src/common/md/${name}`], function (html) {
             that.setState({
                 md: html
             });
@@ -28,9 +29,7 @@ export default class Post extends React.Component {
     }
     render () {
         return (
-            <div>
-                <div dangerouslySetInnerHTML={{__html: this.state.md}}></div>
-            </div>
+            <div dangerouslySetInnerHTML={{__html: this.state.md}}></div>
         );
     }
 };

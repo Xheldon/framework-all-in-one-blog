@@ -1,8 +1,8 @@
 <template>
     <div>
         <ul>
-            <li v-for="(item, name) in list" v-if="item[0] === 'post'">
-                <router-link
+            <li v-for="(item, name, index) in list" v-if="item[0] === 'post'">
+                {{index + 1}}. <router-link
                         :to="{name: 'post', params: {name: name}}">{{item[1]}}</router-link>  » <i><span>{{item[2]}}</span></i>
             </li>
         </ul>
