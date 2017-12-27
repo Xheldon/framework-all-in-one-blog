@@ -102,7 +102,7 @@ module.exports = webpackMerge(baseConfig, {
             filename: 'common/vendor.js'
         })
     ].concat(html),
-    bail: true // ??? 待查
+    bail: true // 在第一个错误出错时抛出，而不是无视错误。
 }, {
     module: {
         rules: [
