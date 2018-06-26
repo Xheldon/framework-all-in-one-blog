@@ -1,0 +1,1 @@
+// TODO: reconfiguration the  vue with typescript

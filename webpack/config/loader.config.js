@@ -58,6 +58,7 @@ let assetsPath = (_path) => {
 };
 
 let templateUrl = path.resolve(__dirname, '../../src/common/template/index.html');
+let ngTemplateUrl = path.resolve(__dirname, '../../src/common/template/ng-index.html');
 
 
 let styleLoaders = (options) => { // 待查
@@ -78,6 +79,7 @@ module.exports = {
     vueLoader,
     assetsPath,
     templateUrl,
+    ngTemplateUrl,
     styleLoaders
 };
 

@@ -25,6 +25,8 @@
   },
   "homepage": "https://github.com/Xheldon/framework-all-in-one-blog#readme",
   "dependencies": {
+    "@uirouter/angularjs": "^1.0.18",
+    "angular": "^1.2.32",
     "express": "^4.16.2",
     "highlight.js": "^9.12.0",
     "react": "^16.2.0",

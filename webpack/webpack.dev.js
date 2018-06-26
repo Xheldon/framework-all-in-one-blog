@@ -16,7 +16,11 @@ let HtmlWebpackPlugin = require('html-webpack-plugin');
 let html = Object.keys(baseConfig.entry).map((item) => {
     let arr = item.split('/');
     let name = arr.slice(0, -1).join('/');
-
+    let templateUrl = loaderConfig.templateUrl;
+    // angularjs 这个奇葩需要单独判断模板文件, 其内容无法通过纯 js 生成
+    if (name === 'angularjs') {
+        templateUrl = loaderConfig.ngTemplateUrl;
+    }
     return new HtmlWebpackPlugin({
         data: { // data 可以在 html/ejs 中通过条件判断引用
             build: false,
@@ -25,7 +29,7 @@ let html = Object.keys(baseConfig.entry).map((item) => {
             title: `Xheldon'blog - ${name} - project`
         },
         filename: item + '.html',
-        template: 'ejs-compiled-loader!' + loaderConfig.templateUrl,
+        template: 'ejs-compiled-loader!' + templateUrl,
         inject: false,
         minify: false
     });
